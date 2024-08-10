@@ -29,8 +29,8 @@ hit_sound = pygame.mixer.Sound("sounds/hit.wav")
 miss_sound = pygame.mixer.Sound("sounds/miss.wav")
 
 def draw_score_and_misses():
-    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
-    misses_text = font.render(f'Misses: {misses}', True, (255, 255, 255))
+    score_text = font.render(f'Попал: {score}', True, (255, 255, 255))
+    misses_text = font.render(f'Промах: {misses}', True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
     screen.blit(misses_text, (10, 50))  # Отображаем количество промахов
 
