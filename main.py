@@ -19,6 +19,20 @@ target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
 color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+# add new functions
+score = 0
+misses = 0  # Добавляем переменную для учета промахов
+font = pygame.font.SysFont(None, 36)
+
+# Загрузка звуков
+hit_sound = pygame.mixer.Sound("sounds/hit.wav")
+miss_sound = pygame.mixer.Sound("sounds/miss.wav")
+
+def draw_score_and_misses():
+    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+    misses_text = font.render(f'Misses: {misses}', True, (255, 255, 255))
+    screen.blit(score_text, (10, 10))
+    screen.blit(misses_text, (10, 50))  # Отображаем количество промахов
 
 
 running = True
@@ -32,8 +46,16 @@ while running:
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_height:
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
+                score += 1  # Увеличить счёт
+                hit_sound.play()  # Воспроизвести звук попадания
+            else:
+                misses += 1  # Увеличиваем количество промахов при промахе
+                miss_sound.play()  # Воспроизвести звук промаха
+
+
 
     screen.blit(target_image, (target_x, target_y))
+    draw_score_and_misses()
     pygame.display.update()
 
 
